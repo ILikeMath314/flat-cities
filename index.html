@@ -12,7 +12,7 @@
 
                 const Grid = document.getElementById('grid')
 
-                for (let i = 0; i < 3600; i++) {
+                for (let i = 0; i < 3599; i++) {
                     const newGridItem = document.createElement('img')
                     newGridItem.classList.add('item')
                     newGridItem.src = './images/default.gif'
@@ -30,7 +30,6 @@
             .grid-container {
                 display: grid;
                 gap: 10px;
-                grid-template-columns: auto auto auto;
                 columns: 50;
                 background-color: azure;
             }
