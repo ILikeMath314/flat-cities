@@ -9,16 +9,24 @@
 
             window.onload=function() {
 
-
+                var buildMode = false
+                var nowBuildingID = 0
                 const Grid = document.getElementById('grid')
 
                 for (let i = 0; i < 2499; i++) {
                     const newGridItem = document.createElement('img')
                     newGridItem.classList.add('item')
                     newGridItem.src = './images/default.gif'
+                    newGridItem.id = `slot${i}`
                     Grid.appendChild(newGridItem)
+                    newGridItem.addEventListener('click', buildModeCheck)
                 }
 
+                const buildModeCheck = (event) => {
+                    if (nowBuildingID === 0) {
+                        getElementById(event.srcElement.id).src = '/images/green.gif'
+                    }
+                }
             } 
         </script>
         <style>
@@ -29,9 +37,10 @@
             }
             .grid-container {
                 display: grid;
-                gap: 10px;
+                gap: 2px;
                 grid-template-columns: repeat(50, 32px );
                 background-color: azure;
+                margin: 0px;
             }
             body {
                 background-color: rgb(178, 178, 178);
