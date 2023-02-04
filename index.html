@@ -9,9 +9,18 @@
 
             window.onload=function() {
 
+                //Initalization
+
                 var buildMode = false
                 var nowBuildingID = 0
                 const Grid = document.getElementById('grid')
+                const buildModeCheck = (event) => {
+                    if (nowBuildingID === 0) {
+                        getElementById(event.srcElement.id).src = '/images/green.gif'
+                    }
+                }
+
+                //1.Configuring
 
                 for (let i = 0; i < 2499; i++) {
                     const newGridItem = document.createElement('img')
@@ -22,11 +31,6 @@
                     newGridItem.addEventListener('click', buildModeCheck)
                 }
 
-                const buildModeCheck = (event) => {
-                    if (nowBuildingID === 0) {
-                        getElementById(event.srcElement.id).src = '/images/green.gif'
-                    }
-                }
             } 
         </script>
         <style>
