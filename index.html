@@ -15,8 +15,8 @@
                 for (let i = 0; i < 3600; i++) {
                     const newGridItem = document.createElement('img')
                     newGridItem.classList.add('item')
-                    newGridItem.src.add('/images/default.gif')
-                    newGridItem.parentElement.add(Grid)
+                    newGridItem.src = './images/default.gif'
+                    Grid.appendChild(newGridItem)
                 }
 
             } 
@@ -35,7 +35,7 @@
                 background-color: azure;
             }
             body {
-                background-color: rgb(128,128,128)
+                background-color: rgb(178, 178, 178)
             }
         </style>
     </head>
