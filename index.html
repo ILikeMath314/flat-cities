@@ -18,7 +18,7 @@
                     if (nowBuildingID === 0) {
                         document.getElementById(event.srcElement.id).src = './images/green.gif'
                     } else if (nowBuildingID === 1) {
-                        document.getElementById(event.srcElement.id).src = './images/brown.gif'
+                        document.getElementById(event.srcElement.id).src = './images/basic-house.png'
                     }
                 }
 
@@ -53,11 +53,64 @@
             } 
         </script>
         <style>
+            img {
+                width: 64px;
+                height: 64px;
+            }
+
+            .tooltip {
+                position: relative;
+                display: inline-block;
+            }
+            
+            .tooltip .tooltiptext {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 1;
+                bottom: 150%;
+                left: 50%;
+                margin-left: -60px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            .tooltip .tooltiptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: black transparent transparent transparent;
+            }
+
+            .tooltip:hover .tooltiptext {
+                visibility: visible;
+            }
+
+            div.building-list {
+                position: fixed;
+                top: 0;
+                right: 0;
+            }
+
             .item {
                 border-width: 3px;
-                height: 32px;
-                width: 32px;
+                height: 64px;
+                width: 64px;
+                -webkit-user-drag: none;
+                user-select: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
             }
+
             .grid-container {
                 display: grid;
                 gap: 2px;
@@ -65,17 +118,25 @@
                 background-color: azure;
                 margin: 0px;
             }
+
             body {
                 background-color: rgb(178, 178, 178);
                 width: fit-content;
                 height: fit-content;
                 margin: 0px;
             }
+
         </style>
     </head>
     <body>
         <div class="grid-container" id="grid">
             <div class="item"><img src="./images/default.gif"></div>
+        </div>
+        <div class="building-list">
+            <div class="tooltip">
+                <img src="./images/basic-house.png">
+                <p class="tooltip-text">Basic House</p>
+            </div>
         </div>
     </body>
 </html>
