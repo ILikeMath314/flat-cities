@@ -22,6 +22,12 @@
                     }
                 }
 
+                const nowBuildingCheck = (event) => {
+                    if (event.isComposing || event.keyCode === 68) {
+                        
+                    }
+                }
+
                 //1.Configuring
 
                 for (let i = 0; i < 2499; i++) {
@@ -32,6 +38,17 @@
                     Grid.appendChild(newGridItem)
                     newGridItem.addEventListener('click', buildModeCheck)
                 }
+
+                
+
+                function mainloop() {
+
+                }
+
+
+
+                setInterval(mainloop, 40)
+
 
             } 
         </script>
@@ -52,6 +69,7 @@
                 background-color: rgb(178, 178, 178);
                 width: fit-content;
                 height: fit-content;
+                margin: 0px;
             }
         </style>
     </head>
