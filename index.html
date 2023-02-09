@@ -14,17 +14,13 @@
                 var buildMode = false
                 var nowBuildingID = 0
                 const Grid = document.getElementById('grid')
+                const BasicHouseButton = document.getElementById('basic-house-button')
+
                 const buildModeCheck = (event) => {
                     if (nowBuildingID === 0) {
                         document.getElementById(event.srcElement.id).src = './images/green.gif'
                     } else if (nowBuildingID === 1) {
                         document.getElementById(event.srcElement.id).src = './images/basic-house.png'
-                    }
-                }
-
-                const nowBuildingCheck = (event) => {
-                    if (event.isComposing || event.keyCode === 68) {
-                        
                     }
                 }
 
@@ -39,7 +35,11 @@
                     newGridItem.addEventListener('click', buildModeCheck)
                 }
 
-                
+                function changeToBasicHouse() {
+                    nowBuildingID = 1
+                }
+
+                BasicHouseButton.addEventListener('click', changeToBasicHouse)
 
                 function mainloop() {
 
@@ -58,46 +58,12 @@
                 height: 64px;
             }
 
-            .tooltip {
-                position: relative;
-                display: inline-block;
-            }
-            
-            .tooltip .tooltiptext {
-                visibility: hidden;
-                width: 120px;
-                background-color: black;
-                color: #fff;
-                text-align: center;
-                border-radius: 6px;
-                padding: 5px 0;
-                position: absolute;
-                z-index: 1;
-                bottom: 150%;
-                left: 50%;
-                margin-left: -60px;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-            }
-
-            .tooltip .tooltiptext::after {
-                content: "";
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                margin-left: -5px;
-                border-width: 5px;
-                border-style: solid;
-                border-color: black transparent transparent transparent;
-            }
-
-            .tooltip:hover .tooltiptext {
-                visibility: visible;
-            }
-
             div.building-list {
                 position: fixed;
                 top: 0;
                 right: 0;
+                height: 100%;
+                width: 350;
             }
 
             .item {
@@ -114,7 +80,7 @@
             .grid-container {
                 display: grid;
                 gap: 2px;
-                grid-template-columns: repeat(50, 32px );
+                grid-template-columns: repeat(50, 64px );
                 background-color: azure;
                 margin: 0px;
             }
@@ -134,8 +100,8 @@
         </div>
         <div class="building-list">
             <div class="tooltip">
-                <img src="./images/basic-house.png">
-                <p class="tooltip-text">Basic House</p>
+                <img id="basic-house-button" src="./images/basic-house.png">
+                <p class="tooltip-text" style="font-family: 'Courier New', Courier, monospace; text-align: center;">Basic House</p>
             </div>
         </div>
     </body>
