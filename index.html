@@ -13,14 +13,33 @@
 
                 var buildMode = false
                 var nowBuildingID = 0
+                var tick = 0
+
+                function changeNowBuildingId(Id) {
+                    nowBuildingID = Id
+                }
+
                 const Grid = document.getElementById('grid')
                 const BasicHouseButton = document.getElementById('basic-house-button')
-
+                const GrassButton = document.getElementById('grass-button')
+                const StraightRoadButton = document.getElementById('road-straight-button')
+                const CurvedRoadButton = document.getElementById('road-curved-button')
+                const BasicHouseChanger = changeNowBuildingId(1)
+                const GrassChanger = changeNowBuildingId(0)
+                const StraightRoadChanger = changeNowBuildingId(2)
+                const CurvedRoadChanger = changeNowBuildingId(3)
+                
                 const buildModeCheck = (event) => {
                     if (nowBuildingID === 0) {
                         document.getElementById(event.srcElement.id).src = './images/green.gif'
                     } else if (nowBuildingID === 1) {
                         document.getElementById(event.srcElement.id).src = './images/basic-house.png'
+                    } else if (nowBuildingID === 2) {
+                        document.getElementById(event.srcElement.id).src = './images/road-straight.png'
+                    } else if (nowBuildingID === 3) {
+                        document.getElementById(event.srcElement.id).src = './images/road-curved.png'
+                    } else if (nowBuildingID === 4) {
+                        document.getElementById(event.srcElement.id).src = './images/default.gif'
                     }
                 }
 
@@ -35,14 +54,13 @@
                     newGridItem.addEventListener('click', buildModeCheck)
                 }
 
-                function changeToBasicHouse() {
-                    nowBuildingID = 1
-                }
-
-                BasicHouseButton.addEventListener('click', changeToBasicHouse)
+                BasicHouseButton.addEventListener('click', BasicHouseChanger)
+                GrassButton.addEventListener('click', GrassChanger)
+                CurvedRoadButton.addEventListener('click', CurvedRoadChanger)
+                StraightRoadButton.addEventListener('click', StraightRoadChanger)
 
                 function mainloop() {
-
+                    tick = tick + 1
                 }
 
 
@@ -60,8 +78,8 @@
             }
 
             img.buildingChanger {
-                align-self: center;
-                margin: 10px;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             div.building-list {
@@ -108,7 +126,19 @@
         <div class="building-list">
             <div>
                 <img id="basic-house-button" src="./images/basic-house.png" class="buildingChanger">
-                <p style="font-family: 'Courier New', Courier, monospace; text-align: center; font-size:30px">Basic House</p>
+                <p style="font-family: 'Courier New', Courier, monospace; text-align: center; font-size:20px">Basic House</p>
+            </div>
+            <div>
+                <img id="grass-button" src="./images/green.gif" class="buildingChanger">
+                <p style="font-family: 'Courier New', Courier, monospace; text-align: center; font-size:20px">Grass</p>
+            </div>
+            <div>
+                <img id="road-straight-button" src="./images/road-straight.png" class="buildingChanger">
+                <p style="font-family: 'Courier New', Courier, monospace; text-align: center; font-size:20px">Road</p>
+            </div>
+            <div>
+                <img id="road-curved-button" src="./images/road-curved.png" class="buildingChanger">
+                <p style="font-family: 'Courier New', Courier, monospace; text-align: center; font-size:20px">Curved road</p>
             </div>
         </div>
     </body>
