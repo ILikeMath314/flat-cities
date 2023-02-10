@@ -32,13 +32,17 @@
                 const buildModeCheck = (event) => {
                     if (nowBuildingID === 0) {
                         document.getElementById(event.srcElement.id).src = './images/green.gif'
-                    } else if (nowBuildingID === 1) {
+                    }
+                    if (nowBuildingID === 1) {
                         document.getElementById(event.srcElement.id).src = './images/basic-house.png'
-                    } else if (nowBuildingID === 2) {
+                    }
+                    if (nowBuildingID === 2) {
                         document.getElementById(event.srcElement.id).src = './images/road-straight.png'
-                    } else if (nowBuildingID === 3) {
+                    }
+                    if (nowBuildingID === 3) {
                         document.getElementById(event.srcElement.id).src = './images/road-curved.png'
-                    } else if (nowBuildingID === 4) {
+                    }
+                    if (nowBuildingID === 4) {
                         document.getElementById(event.srcElement.id).src = './images/default.gif'
                     }
                 }
