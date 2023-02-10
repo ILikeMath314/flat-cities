@@ -15,20 +15,12 @@
                 var nowBuildingID = 0
                 var tick = 0
 
-                function changeNowBuildingId(Id) {
-                    nowBuildingID = Id
-                }
-
                 const Grid = document.getElementById('grid')
                 const BasicHouseButton = document.getElementById('basic-house-button')
                 const GrassButton = document.getElementById('grass-button')
                 const StraightRoadButton = document.getElementById('road-straight-button')
                 const CurvedRoadButton = document.getElementById('road-curved-button')
-                const BasicHouseChanger = changeNowBuildingId(1)
-                const GrassChanger = changeNowBuildingId(0)
-                const StraightRoadChanger = changeNowBuildingId(2)
-                const CurvedRoadChanger = changeNowBuildingId(3)
-                
+    
                 const buildModeCheck = (event) => {
                     if (nowBuildingID === 0) {
                         document.getElementById(event.srcElement.id).src = './images/green.gif'
@@ -58,10 +50,10 @@
                     newGridItem.addEventListener('click', buildModeCheck)
                 }
 
-                BasicHouseButton.addEventListener('click', BasicHouseChanger)
-                GrassButton.addEventListener('click', GrassChanger)
-                CurvedRoadButton.addEventListener('click', CurvedRoadChanger)
-                StraightRoadButton.addEventListener('click', StraightRoadChanger)
+                BasicHouseButton.addEventListener('click', function() {nowBuildingID = 1})
+                GrassButton.addEventListener('click', function() {nowBuildingID = 0})
+                CurvedRoadButton.addEventListener('click', function() {nowBuildingID = 2})
+                StraightRoadButton.addEventListener('click', function() {nowBuildingID = 3})
 
                 function mainloop() {
                     tick = tick + 1
