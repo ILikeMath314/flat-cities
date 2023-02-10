@@ -37,29 +37,39 @@
                 }
 
                 const buildModeCheck = (event) => {
-                    if (nowBuildingID === 0) {
-                        document.getElementById(event.srcElement.id).src = "./images/green.gif"
-                        document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                    if (buildMode) {
+                        if (nowBuildingID === 0) {
+                            document.getElementById(event.srcElement.id).src = "./images/green.gif"
+                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            hidePlacementIndicators()
+                            showPlacementIndicator0()
+                        }
+                        if (nowBuildingID === 1) {
+                            document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
+                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            hidePlacementIndicators()
+                            showPlacementIndicator1()
+                        }
+                        if (nowBuildingID === 2) {
+                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).classList.add("road")
+                            hidePlacementIndicators()
+                            showPlacementIndicator2()
+                        }
+                        if (nowBuildingID === 3) {
+                            document.getElementById(event.srcElement.id).src = "./images/road-curved.png"
+                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).classList.add("road")
+                            hidePlacementIndicators()
+                            showPlacementIndicator3()
+                        }
+                        if (nowBuildingID === 4) {
+                            document.getElementById(event.srcElement.id).src = "./images/default.gif"
+                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                        }
                     }
-                    if (nowBuildingID === 1) {
-                        document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                        document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
-                    }
-                    if (nowBuildingID === 2) {
-                        document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                        document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
-                        document.getElementById(event.srcElement.id).classList.add("road")
-                    }
-                    if (nowBuildingID === 3) {
-                        document.getElementById(event.srcElement.id).src = "./images/road-curved.png"
-                        document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
-                        document.getElementById(event.srcElement.id).classList.add("road")
-                    }
-                    if (nowBuildingID === 4) {
-                        document.getElementById(event.srcElement.id).src = "./images/default.gif"
-                        document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
-                    }
-                    }
+                }
 
                 const rotateBuild = (event) => {
                     if (event.key == "KeyR") {
@@ -69,10 +79,8 @@
 
                     //1.Configuring
 
-                for (let i = 0; i < 2499; i++) {
+                for (let i = 0; i < 2500; i++) {
                     const newGridItem = document.createElement("img")
-                    const newGridTrySlot = document.createElement("img")
-
                     newGridItem.classList.add("item")
                     newGridItem.src = "./images/default.gif"
                     newGridItem.id = `slot${i}`
@@ -84,16 +92,16 @@
                 }
 
                 function showPlacementIndicator0() {
-                    document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+32}; left:${mouseX+32}; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
                 }
                 function showPlacementIndicator1() {
-                    document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY+32}; left:${mouseX+32}; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
                 }
                 function showPlacementIndicator2() {
-                    document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY+32}; left:${mouseX+32}; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
                 }
                 function showPlacementIndicator3() {
-                    document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+32}; left:${mouseX+32}; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
                 }
                 function hidePlacementIndicators() {
                     document.getElementById("indicator3").style = "opacity:0;"
@@ -185,9 +193,7 @@
     </head>
     <body>
         <!--main grid-->
-        <div class="grid-container" id="grid">
-            <div class="item"><img src="./images/default.gif"></div>
-        </div>
+        <div class="grid-container" id="grid"></div>
         <!--building changer buttons-->
         <div class="building-list">
             <div id="build-button">
