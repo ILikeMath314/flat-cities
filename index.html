@@ -59,17 +59,22 @@
                 align-self: center;
             }
 
+            img.buildingChanger {
+                align-self: center;
+                margin: 10px;
+            }
+
             div.building-list {
                 position: fixed;
                 top: 0;
                 right: 0;
                 height: 100%;
                 width: 300px;
-                background-color: chocolate;
+                background-color: rgba(210, 105, 30, 0.538);
             }
 
             .item {
-                border-width: 3px;
+                border-width: 0px;
                 height: 64px;
                 width: 64px;
                 -webkit-user-drag: none;
@@ -102,8 +107,8 @@
         </div>
         <div class="building-list">
             <div>
-                <img id="basic-house-button" src="./images/basic-house.png">
-                <p class="tooltip-text" style="font-family: 'Courier New', Courier, monospace; text-align: center;">Basic House</p>
+                <img id="basic-house-button" src="./images/basic-house.png" class="buildingChanger">
+                <p style="font-family: 'Courier New', Courier, monospace; text-align: center; font-size:30px">Basic House</p>
             </div>
         </div>
     </body>
