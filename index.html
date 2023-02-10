@@ -73,7 +73,13 @@
                     newGridItem.src = './images/default.gif'
                     newGridItem.id = `slot${i}`
                     Grid.appendChild(newGridItem)
+                    const newGridTrySlot = document.createElement('img')
+                    newGridTrySlot.classList.add('tryslot')
+                    newGridTrySlot.src = './images/default.gif'
+                    newGridTrySlot.id = `try${i}`
+                    Grid.appendChild(newGridTrySlot)
                     newGridItem.addEventListener('click', buildModeCheck)
+                    newGridTrySlot.addEventListener('mouseover', buildModeTry)
                 }
 
                 BasicHouseButton.addEventListener('click', function() {nowBuildingID = 1})
