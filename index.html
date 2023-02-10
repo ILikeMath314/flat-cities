@@ -14,6 +14,7 @@
                 var buildMode = false
                 var nowBuildingID = 0
                 var tick = 0
+                var buildRotation = 0
 
                 const Grid = document.getElementById('grid')
                 const BasicHouseButton = document.getElementById('basic-house-button')
@@ -23,19 +24,44 @@
     
                 const buildModeCheck = (event) => {
                     if (nowBuildingID === 0) {
+                        document.getElementById(event.srcElement.id).style = 'opacity:1;'
+                    }
+                    if (nowBuildingID === 1) {
+                        document.getElementById(event.srcElement.id).style = 'opacity:1;'
+                    }
+                    if (nowBuildingID === 2) {
+                        document.getElementById(event.srcElement.id).style = 'opacity:1;'
+                        document.getElementById(event.srcElement.id).classList.appendChild('road')
+                    }
+                    if (nowBuildingID === 3) {
+                        document.getElementById(event.srcElement.id).style = 'opacity:1;'
+                        document.getElementById(event.srcElement.id).classList.appendChild('road')
+                    }
+                    if (nowBuildingID === 4) {
+                        document.getElementById(event.srcElement.id).style = 'opacity:1;'
+                    }
+                }
+
+                const buildModeTry = () => {
+                    if (nowBuildingID === 0) {
                         document.getElementById(event.srcElement.id).src = './images/green.gif'
+                        document.getElementById(event.srcElement.id).style = `opacity:0.4; rotation: ${buildRotation}deg`
                     }
                     if (nowBuildingID === 1) {
                         document.getElementById(event.srcElement.id).src = './images/basic-house.png'
+                        document.getElementById(event.srcElement.id).style = `opacity:0.4; rotation: ${buildRotation}deg`
                     }
                     if (nowBuildingID === 2) {
                         document.getElementById(event.srcElement.id).src = './images/road-straight.png'
+                        document.getElementById(event.srcElement.id).style = `opacity:0.4; rotation: ${buildRotation}deg`
                     }
                     if (nowBuildingID === 3) {
                         document.getElementById(event.srcElement.id).src = './images/road-curved.png'
+                        document.getElementById(event.srcElement.id).style = `opacity:0.4; rotation: ${buildRotation}deg`
                     }
                     if (nowBuildingID === 4) {
                         document.getElementById(event.srcElement.id).src = './images/default.gif'
+                        document.getElementById(event.srcElement.id).style = `opacity:0.4; rotation: ${buildRotation}deg`
                     }
                 }
 
