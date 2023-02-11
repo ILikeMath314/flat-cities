@@ -35,7 +35,7 @@
                 const StraightRoadButton = document.getElementById("road-straight-button")
                 const CurvedRoadButton = document.getElementById("road-curved-button")
                 const ErrorMessageBox = document.querySelector("div.error-message-box")
-                const ErrorMessage = ErrorMessageBox.firstElementChild()
+                const ErrorMessage = document.getElementById("error-message")
 
                 function showPlacementIndicator0() {
                     document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
@@ -175,7 +175,7 @@
 
                     //1.Configuring
 
-                for (let i = 0; i < 2500; i++) {
+                for (let i = 0; i < 2499; i++) {
                     const newGridItem = document.createElement("img")
                     newGridItem.classList.add("item")
                     newGridItem.src = "./images/default.gif"
@@ -281,35 +281,41 @@
                 margin: 0px;
             }
 
+            p {
+                font-family: 'Montserrat', sans-serif;
+            }
+
         </style>
     </head>
     <body>
         <!--main grid-->
-        <div class="grid-container" id="grid"></div>
+        <div class="grid-container" id="grid">
+            <img src="./images/road-straight.png" class="road">
+        </div>
 
         <!--error message box-->
         <div class="error-message-box"><p id="error-message"></p></div>
 
         <!--building changer buttons-->
         <div class="building-list">
-            <div id="build-button">
-                <p style="font-family: 'Montserrat', sans-serif;">Build</p>
+            <div style="text-align: center" id="build-button">
+                <p>Build</p>
             </div>
             <div>
                 <img id="basic-house-button" src="./images/basic-house.png" class="buildingChanger">
-                <p style="font-family: 'Montserrat', sans-serif; text-align: center; font-size:20px">Basic House</p>
+                <p style="text-align: center; font-size:20px">Basic House</p>
             </div>
             <div>
                 <img id="grass-button" src="./images/green.gif" class="buildingChanger">
-                <p style="font-family: 'Montserrat', sans-serif; text-align: center; font-size:20px">Grass</p>
+                <p style="text-align: center; font-size:20px">Grass</p>
             </div>
             <div>
                 <img id="road-straight-button" src="./images/road-straight.png" class="buildingChanger">
-                <p style="font-family: 'Montserrat', sans-serif; text-align: center; font-size:20px">Road</p>
+                <p style="text-align: center; font-size:20px">Road</p>
             </div>
             <div>
                 <img id="road-curved-button" src="./images/road-curved.png" class="buildingChanger">
-                <p style="font-family: 'Montserrat', sans-serif; text-align: center; font-size:20px">Curved road</p>
+                <p style="text-align: center; font-size:20px">Curved road</p>
             </div>
         </div>
         <!--placement indicators-->
