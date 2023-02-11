@@ -31,6 +31,24 @@
                 const StraightRoadButton = document.getElementById("road-straight-button")
                 const CurvedRoadButton = document.getElementById("road-curved-button")
 
+                function showPlacementIndicator0() {
+                    document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                }
+                function showPlacementIndicator1() {
+                    document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                }
+                function showPlacementIndicator2() {
+                    document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                }
+                function showPlacementIndicator3() {
+                    document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                }
+                function hidePlacementIndicators() {
+                    document.getElementById("indicator3").style = "opacity:0;"
+                    document.getElementById("indicator2").style = "opacity:0;"
+                    document.getElementById("indicator1").style = "opacity:0;"
+                    document.getElementById("indicator0").style = "opacity:0;"
+                }
                 const getMouseCoords = (event) => {
                     mouseY = event.clientY
                     mouseX = event.clientX
@@ -91,25 +109,6 @@
                     buildMode = !(buildMode)
                 }
 
-                function showPlacementIndicator0() {
-                    document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
-                }
-                function showPlacementIndicator1() {
-                    document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
-                }
-                function showPlacementIndicator2() {
-                    document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
-                }
-                function showPlacementIndicator3() {
-                    document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
-                }
-                function hidePlacementIndicators() {
-                    document.getElementById("indicator3").style = "opacity:0;"
-                    document.getElementById("indicator2").style = "opacity:0;"
-                    document.getElementById("indicator1").style = "opacity:0;"
-                    document.getElementById("indicator0").style = "opacity:0;"
-                }
-
                 Body.addEventListener("mouseover", getMouseCoords)
                 BasicHouseButton.addEventListener("click", function() {nowBuildingID = 1})
                 GrassButton.addEventListener("click", function() {nowBuildingID = 0})
@@ -132,12 +131,12 @@
         </script>
         <style>
             #build-button {
-                font-size: large
-            }
-            img.tryslot {
-                width: 64px;
-                height: 64px;
-                align-self: center;
+                font-size: 40px;
+                width: 300px;
+                height: 140px;
+                border: 3px rgba(208, 213, 105, 0.83);
+                border-radius: 5px;
+                cursor: pointer;
             }
 
             img.placement-indicator {
@@ -149,8 +148,8 @@
             }
 
             img.buildingChanger {
-                margin-left: auto;
-                margin-right: auto;
+                margin-left: 33%;
+                margin-right: 33%;
             }
 
             div.building-list {
