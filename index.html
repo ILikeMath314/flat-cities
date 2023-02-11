@@ -103,7 +103,7 @@
                 }
 
                 const rotateBuild = (event) => {
-                    if (event.key == "KeyR") {
+                    if (event.keycode == "KeyR") {
                         buildRotation = buildRotation + 90
                     }
                 }
@@ -161,6 +161,8 @@
                 position: absolute;
                 top: 0px;
                 left: 0px;
+                width: 64px;
+                height: 64px;
                 z-index: 1;
             }
 
