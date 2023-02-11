@@ -22,6 +22,10 @@
                 var mouseY = null
                 var mouseX = null
 
+                async function delay() {
+                    return new Promise(resolve => {resolve()})
+                }
+
                 const Body = document.querySelector("body")
 
                 const Grid = document.getElementById("grid")
@@ -30,49 +34,110 @@
                 const GrassButton = document.getElementById("grass-button")
                 const StraightRoadButton = document.getElementById("road-straight-button")
                 const CurvedRoadButton = document.getElementById("road-curved-button")
+                const ErrorMessageBox = document.querySelector("div.error-message-box")
+                const ErrorMessage = ErrorMessageBox.firstElementChild()
 
                 function showPlacementIndicator0() {
                     document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
                 }
+
                 function showPlacementIndicator1() {
                     document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
                 }
+
                 function showPlacementIndicator2() {
                     document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
                 }
+
                 function showPlacementIndicator3() {
                     document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
                 }
+
                 function hidePlacementIndicators() {
                     document.getElementById("indicator3").style = "opacity:0;"
                     document.getElementById("indicator2").style = "opacity:0;"
                     document.getElementById("indicator1").style = "opacity:0;"
                     document.getElementById("indicator0").style = "opacity:0;"
                 }
+
+                function fadeOutEffect() {
+                    var fadeTarget = ErrorMessageBox;
+                    var fadeEffect = setInterval(function () {
+                        if (fadeTarget.style.opacity > 0) {
+                            fadeTarget.style.opacity -= 0.1;
+                        } else {
+                            clearInterval(fadeEffect);
+                        }
+                    }, 100);
+                }
+
+                async function showErrorMsg(msg) {
+                    ErrorMessage.textContent = msg
+                    ErrorMessageBox.style = "opacity:0.88;"
+                    await delay(1200)
+                    fadeOutEffect()
+                }
+                
                 const getMouseCoords = (event) => {
                     mouseY = event.clientY
                     mouseX = event.clientX
                 }
 
-                const buildModeCheck = (event) => {
+                const buildModeCheck = async (event) => {
                     if (buildMode) {
                         if (nowBuildingID === 0) {
                             document.getElementById(event.srcElement.id).src = "./images/green.gif"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                         }
                         if (nowBuildingID === 1) {
-                            document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            if (buildRotation%360 === 0 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            } else {
+                                showErrorMsg("Houses can only be placed facing roads.")
+                            }
+                            if (buildRotation%360 === 90 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            } else {
+                                showErrorMsg("Houses can only be placed facing roads.")
+                            }
+                            if (buildRotation%360 === 180 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            } else {
+                                showErrorMsg("Houses can only be placed facing roads.")
+                            }
+                            if (buildRotation%360 === 270 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            } else {
+                                showErrorMsg("Houses can only be placed facing roads.")
+                            }
                         }
                         if (nowBuildingID === 2) {
-                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            document.getElementById(event.srcElement.id).classList.add("road")
+                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                document.getElementById(event.srcElement.id).classList.add("road")
+                            } else {
+                                showErrorMsg("roads can only be placed next to roads")
+                            }
                         }
                         if (nowBuildingID === 3) {
-                            document.getElementById(event.srcElement.id).src = "./images/road-curved.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            document.getElementById(event.srcElement.id).classList.add("road")
+                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                document.getElementById(event.srcElement.id).classList.add("road")
+                            } else {
+                                showErrorMsg("roads can only be placed next to roads")
+                            }
                         }
                         if (nowBuildingID === 4) {
                             document.getElementById(event.srcElement.id).src = "./images/default.gif"
@@ -118,6 +183,7 @@
                     newGridItem.addEventListener("click", buildModeCheck)
                     Grid.appendChild(newGridItem)
                 }
+
                 function changeBuildMode() {
                     buildMode = !(buildMode)
                 }
@@ -155,7 +221,13 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
-
+            div.error-message-box {
+                opacity: 1;
+                position: absolute;
+                top: 0px;
+                left: 35%;
+                right: 35%;
+            }
             img.placement-indicator {
                 opacity: 0;
                 position: absolute;
@@ -214,6 +286,10 @@
     <body>
         <!--main grid-->
         <div class="grid-container" id="grid"></div>
+
+        <!--error message box-->
+        <div class="error-message-box"><p id="error-message"></p></div>
+
         <!--building changer buttons-->
         <div class="building-list">
             <div id="build-button">
