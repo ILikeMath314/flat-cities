@@ -34,6 +34,8 @@
                 const GrassButton = document.getElementById("grass-button")
                 const StraightRoadButton = document.getElementById("road-straight-button")
                 const CurvedRoadButton = document.getElementById("road-curved-button")
+                const RoadIntersection2Button = document.getElementById("road-2intersection-button")
+                const RoadIntersectionTButton = document.getElementById("road-Tintersection-button")
                 const ErrorMessageBox = document.querySelector("div.error-message-box")
                 const ErrorMessage = document.getElementById("error-message")
 
@@ -53,7 +55,17 @@
                     document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
                 }
 
+                function showPlacementIndicator4() {
+                    document.getElementById("indicator4").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
+                }
+
+                function showPlacementIndicator5() {
+                    document.getElementById("indicator5").style = `opacity:0.68; top:${mouseY+3}px; left:${mouseX+3}px; rotate:${buildRotation%360}deg;`
+                }
+
                 function hidePlacementIndicators() {
+                    document.getElementById("indicator5").style = "opacity:0;"
+                    document.getElementById("indicator4").style = "opacity:0;"
                     document.getElementById("indicator3").style = "opacity:0;"
                     document.getElementById("indicator2").style = "opacity:0;"
                     document.getElementById("indicator1").style = "opacity:0;"
@@ -140,9 +152,29 @@
                             }
                         }
                         if (nowBuildingID === 4) {
-                            document.getElementById(event.srcElement.id).src = "./images/default.gif"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                document.getElementById(event.srcElement.id).classList.add("road")
+                            } else {
+                                showErrorMsg("roads can only be placed next to roads")
+                            }
                         }
+                        if (nowBuildingID === 5) {
+                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
+                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
+                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                document.getElementById(event.srcElement.id).classList.add("road")
+                            } else {
+                                showErrorMsg("roads can only be placed next to roads")
+                            }
+                        }                   
                     }
                 }
 
@@ -163,6 +195,14 @@
                         if (nowBuildingID === 3) {
                             hidePlacementIndicators()
                             showPlacementIndicator3()
+                        }
+                        if (nowBuildingID === 4) {
+                            hidePlacementIndicators()
+                            showPlacementIndicator4()
+                        }
+                        if (nowBuildingID === 5) {
+                            hidePlacementIndicators()
+                            showPlacementIndicator5()
                         }
                     }
                 }
@@ -194,6 +234,8 @@
                 GrassButton.addEventListener("click", function() {nowBuildingID = 0})
                 CurvedRoadButton.addEventListener("click", function() {nowBuildingID = 3})
                 StraightRoadButton.addEventListener("click", function() {nowBuildingID = 2})
+                RoadIntersection2Button.addEventListener("click", function() {nowBuildingID = 5})
+                RoadIntersectionTButton.addEventListener("click", function() {nowBuildingID = 4})
                 BuildButton.addEventListener("click", changeBuildMode)
                 document.addEventListener("keydown", rotateBuild)
 
@@ -317,8 +359,18 @@
                 <img id="road-curved-button" src="./images/road-curved.png" class="buildingChanger">
                 <p style="text-align: center; font-size:20px">Curved road</p>
             </div>
+            <div>
+                <img id="road-2intersection-button" src="./images/road-4intersection.png" class="buildingChanger">
+                <p style="text-align: center; font-size:20px">2 road intersection</p>
+            </div>
+            <div>
+                <img id="road-Tintersection-button" src="./images/road-3intersection.png" class="buildingChanger">
+                <p style="text-align: center; font-size:20px">T shaped road intersection</p>
+            </div>
         </div>
         <!--placement indicators-->
+        <img id="indicator5" class="placement-indicator" src="./images/road-4intersection.png">
+        <img id="indicator4" class="placement-indicator" src="./images/road-3intersection.png">
         <img id="indicator3" class="placement-indicator" src="./images/road-curved.png">
         <img id="indicator2" class="placement-indicator" src="./images/road-straight.png">
         <img id="indicator1" class="placement-indicator" src="./images/basic-house.png">
