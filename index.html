@@ -97,30 +97,37 @@
 
                 const buildModeCheck = async (event) => {
                     if (buildMode) {
+
+                        const srcID = event.srcElement.id
+                        const UpperSlot = `slot${Number(srcID.slice(4))-50}`  
+                        const UnderSlot = `slot${Number(srcID.slice(4))+50}` 
+                        const LeftSlot = `slot${Number(srcID.slice(4))-1}`   
+                        const RightSlot = `slot${Number(srcID.slice(4))+1}`
+
                         if (nowBuildingID === 0) {
                             document.getElementById(event.srcElement.id).src = "./images/green.gif"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                         }
                         if (nowBuildingID === 1) {
-                            if (buildRotation%360 === 0 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road")) {
+                            if (buildRotation%360 === 0 && (document.getElementById(UnderSlot).classList.contains("road"))) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
                                 showErrorMsg("Houses can only be placed facing roads.")
                             }
-                            if (buildRotation%360 === 90 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road")) {
+                            if (buildRotation%360 === 90 && document.getElementById(LeftSlot).classList.contains("road")) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
                                 showErrorMsg("Houses can only be placed facing roads.")
                             }
-                            if (buildRotation%360 === 180 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            if (buildRotation%360 === 180 && document.getElementById(UpperSlot).classList.contains("road")) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
                                 showErrorMsg("Houses can only be placed facing roads.")
                             }
-                            if (buildRotation%360 === 270 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList.contains("road")) {
+                            if (buildRotation%360 === 270 && (document.getElementById(RightSlot).classList.contains("road"))) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
@@ -128,10 +135,10 @@
                             }
                         }
                         if (nowBuildingID === 2) {
-                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            if (document.getElementById(RightSlot).classList .contains("road") ||
+                                (document.getElementById(UnderSlot).classList.contains("road")) ||
+                                (document.getElementById(LeftSlot).classList.contains("road")) ||
+                                (document.getElementById(UpperSlot).classList.contains("road"))) {
                             document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             document.getElementById(event.srcElement.id).classList.add("road")
@@ -140,10 +147,10 @@
                             }
                         }
                         if (nowBuildingID === 3) {
-                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            if (document.getElementById(RightSlot).classList .contains("road")||
+                                (document.getElementById(UnderSlot).classList.contains("road"))||
+                                (document.getElementById(LeftSlot).classList.contains("road")) ||
+                                (document.getElementById(UpperSlot).classList.contains("road"))) {
                             document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             document.getElementById(event.srcElement.id).classList.add("road")
@@ -152,10 +159,10 @@
                             }
                         }
                         if (nowBuildingID === 4) {
-                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            if (document.getElementById(RightSlot).classList .contains("road")||
+                                (document.getElementById(UnderSlot).classList.contains("road"))||
+                                (document.getElementById(LeftSlot).classList.contains("road")) ||
+                                (document.getElementById(UpperSlot).classList.contains("road"))) {
                             document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             document.getElementById(event.srcElement.id).classList.add("road")
@@ -164,10 +171,10 @@
                             }
                         }
                         if (nowBuildingID === 5) {
-                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
-                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            if ((document.getElementById(RightSlot).classList.contains("road")) ||
+                                (document.getElementById(UnderSlot).classList.contains("road"))||
+                                (document.getElementById(LeftSlot).classList.contains("road")) ||
+                                (document.getElementById(UpperSlot).classList.contains("road"))) {                                                                                                                                                                                                                                    
                             document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             document.getElementById(event.srcElement.id).classList.add("road")
