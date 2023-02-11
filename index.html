@@ -32,16 +32,16 @@
                 const CurvedRoadButton = document.getElementById("road-curved-button")
 
                 function showPlacementIndicator0() {
-                    document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator0").style = `opacity:0.68; top:${mouseY-32}px; left:${mouseX-32}px; rotate:${buildRotation%360}deg;`
                 }
                 function showPlacementIndicator1() {
-                    document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator1").style = `opacity:0.68; top:${mouseY-32}px; left:${mouseX-32}px; rotate:${buildRotation%360}deg;`
                 }
                 function showPlacementIndicator2() {
-                    document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator2").style = `opacity:0.68; top:${mouseY-32}px; left:${mouseX-32}px; rotate:${buildRotation%360}deg;`
                 }
                 function showPlacementIndicator3() {
-                    document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY+32}px; left:${mouseX+32}px; rotation:${buildRotation%360}deg;`
+                    document.getElementById("indicator3").style = `opacity:0.68; top:${mouseY-32}px; left:${mouseX-32}px; rotate:${buildRotation%360}deg;`
                 }
                 function hidePlacementIndicators() {
                     document.getElementById("indicator3").style = "opacity:0;"
@@ -58,33 +58,33 @@
                     if (buildMode) {
                         if (nowBuildingID === 0) {
                             document.getElementById(event.srcElement.id).src = "./images/green.gif"
-                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             hidePlacementIndicators()
                             showPlacementIndicator0()
                         }
                         if (nowBuildingID === 1) {
                             document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             hidePlacementIndicators()
                             showPlacementIndicator1()
                         }
                         if (nowBuildingID === 2) {
                             document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             document.getElementById(event.srcElement.id).classList.add("road")
                             hidePlacementIndicators()
                             showPlacementIndicator2()
                         }
                         if (nowBuildingID === 3) {
                             document.getElementById(event.srcElement.id).src = "./images/road-curved.png"
-                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             document.getElementById(event.srcElement.id).classList.add("road")
                             hidePlacementIndicators()
                             showPlacementIndicator3()
                         }
                         if (nowBuildingID === 4) {
                             document.getElementById(event.srcElement.id).src = "./images/default.gif"
-                            document.getElementById(event.srcElement.id).style = `rotation:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                         }
                     }
                 }
@@ -131,7 +131,7 @@
                 }
 
                 Body.addEventListener("mouseover", getMouseCoords)
-                Body.addEventListener("mouseover", IndicatorCheck)
+                Grid.addEventListener("mouseover", IndicatorCheck)
                 BasicHouseButton.addEventListener("click", function() {nowBuildingID = 1})
                 GrassButton.addEventListener("click", function() {nowBuildingID = 0})
                 CurvedRoadButton.addEventListener("click", function() {nowBuildingID = 3})
@@ -143,6 +143,7 @@
                     tick = tick + 1
                     if (!buildMode) {
                         BuildButton.textContent = `Build`
+                        hidePlacementIndicators()
                     } else {
                         BuildButton.textContent = `Exit Build Mode`
                     }         
@@ -174,6 +175,8 @@
             img.buildingChanger {
                 margin-left: 33%;
                 margin-right: 33%;
+                width: 64px;
+                height: 64px;
             }
 
             div.building-list {
