@@ -89,6 +89,27 @@
                     }
                 }
 
+                const IndicatorCheck = (event) => {
+                    if (buildMode) {
+                        if (nowBuildingID === 0) {
+                            hidePlacementIndicators()
+                            showPlacementIndicator0()
+                        }
+                        if (nowBuildingID === 1) {
+                            hidePlacementIndicators()
+                            showPlacementIndicator1()
+                        }
+                        if (nowBuildingID === 2) {
+                            hidePlacementIndicators()
+                            showPlacementIndicator2()
+                        }
+                        if (nowBuildingID === 3) {
+                            hidePlacementIndicators()
+                            showPlacementIndicator3()
+                        }
+                    }
+                }
+
                 const rotateBuild = (event) => {
                     if (event.key == "KeyR") {
                         buildRotation = buildRotation + 90
@@ -110,6 +131,7 @@
                 }
 
                 Body.addEventListener("mouseover", getMouseCoords)
+                Body.addEventListener("mouseover", IndicatorCheck)
                 BasicHouseButton.addEventListener("click", function() {nowBuildingID = 1})
                 GrassButton.addEventListener("click", function() {nowBuildingID = 0})
                 CurvedRoadButton.addEventListener("click", function() {nowBuildingID = 3})
@@ -134,7 +156,7 @@
             #build-button {
                 font-size: 26px;
                 width: 300px;
-                height: 10px;
+                height: 80px;
                 border: 3px rgba(208, 213, 105, 0.83);
                 background-color: rgba(32, 174, 122, 0.862);
                 border-radius: 5px;
