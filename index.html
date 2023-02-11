@@ -102,25 +102,25 @@
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                         }
                         if (nowBuildingID === 1) {
-                            if (buildRotation%360 === 0 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList) {
+                            if (buildRotation%360 === 0 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road")) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
                                 showErrorMsg("Houses can only be placed facing roads.")
                             }
-                            if (buildRotation%360 === 90 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList) {
+                            if (buildRotation%360 === 90 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road")) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
                                 showErrorMsg("Houses can only be placed facing roads.")
                             }
-                            if (buildRotation%360 === 180 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
+                            if (buildRotation%360 === 180 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
                                 showErrorMsg("Houses can only be placed facing roads.")
                             }
-                            if (buildRotation%360 === 270 && "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList) {
+                            if (buildRotation%360 === 270 && document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList.contains("road")) {
                                 document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
                                 document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                             } else {
@@ -128,49 +128,49 @@
                             }
                         }
                         if (nowBuildingID === 2) {
-                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
-                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                                document.getElementById(event.srcElement.id).classList.add("road")
+                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).classList.add("road")
                             } else {
                                 showErrorMsg("roads can only be placed next to roads")
                             }
                         }
                         if (nowBuildingID === 3) {
-                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
-                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                                document.getElementById(event.srcElement.id).classList.add("road")
+                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).classList.add("road")
                             } else {
                                 showErrorMsg("roads can only be placed next to roads")
                             }
                         }
                         if (nowBuildingID === 4) {
-                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
-                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                                document.getElementById(event.srcElement.id).classList.add("road")
+                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).classList.add("road")
                             } else {
                                 showErrorMsg("roads can only be placed next to roads")
                             }
                         }
                         if (nowBuildingID === 5) {
-                            if ("road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList ||
-                            "road" in document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList) {
-                                document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                                document.getElementById(event.srcElement.id).classList.add("road")
+                            if (document.getElementById(`slot${Number((event.srcElement.id).slice(4))+1}`).classList .contains("road")||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))+50}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-1}`).classList.contains("road") ||
+                            document.getElementById(`slot${Number((event.srcElement.id).slice(4))-50}`).classList.contains("road")) {
+                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
+                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            document.getElementById(event.srcElement.id).classList.add("road")
                             } else {
                                 showErrorMsg("roads can only be placed next to roads")
                             }
@@ -263,6 +263,10 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
+            div.build-button {
+                border: 3px rgba(208, 213, 105, 0.83);
+                margin: 30px;
+            }
             div.error-message-box {
                 opacity: 1;
                 position: absolute;
@@ -343,29 +347,29 @@
             <div style="text-align: center" id="build-button">
                 <p>Build</p>
             </div>
-            <div>
+            <div class="build-button">
                 <img id="basic-house-button" src="./images/basic-house.png" class="buildingChanger">
-                <p style="text-align: center; font-size:20px">Basic House</p>
+                <p style="text-align: center; font: size 16px;">Basic House</p>
             </div>
-            <div>
+            <div class="build-button">
                 <img id="grass-button" src="./images/green.gif" class="buildingChanger">
-                <p style="text-align: center; font-size:20px">Grass</p>
+                <p style="text-align: center; font: size 16px;">Grass</p>
             </div>
-            <div>
+            <div class="build-button">
                 <img id="road-straight-button" src="./images/road-straight.png" class="buildingChanger">
-                <p style="text-align: center; font-size:20px">Road</p>
+                <p style="text-align: center; font: size 16px;">Road</p>
             </div>
-            <div>
+            <div class="build-button">
                 <img id="road-curved-button" src="./images/road-curved.png" class="buildingChanger">
-                <p style="text-align: center; font-size:20px">Curved road</p>
+                <p style="text-align: center; font: size 16px;">Curved road</p>
             </div>
-            <div>
+            <div class="build-button">
                 <img id="road-2intersection-button" src="./images/road-4intersection.png" class="buildingChanger">
-                <p style="text-align: center; font-size:20px">2 road intersection</p>
+                <p style="text-align: center; font: size 16px;">2 road intersection</p>
             </div>
-            <div>
+            <div class="build-button">
                 <img id="road-Tintersection-button" src="./images/road-3intersection.png" class="buildingChanger">
-                <p style="text-align: center; font-size:20px">T shaped road intersection</p>
+                <p style="text-align: center; font: size 16px;">T shaped road intersection</p>
             </div>
         </div>
         <!--placement indicators-->
