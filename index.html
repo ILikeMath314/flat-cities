@@ -114,11 +114,12 @@
                 GrassButton.addEventListener("click", function() {nowBuildingID = 0})
                 CurvedRoadButton.addEventListener("click", function() {nowBuildingID = 3})
                 StraightRoadButton.addEventListener("click", function() {nowBuildingID = 2})
+                BuildButton.addEventListener("click", changeBuildMode)
                 document.addEventListener("keydown", rotateBuild)
 
                 function mainloop() {
                     tick = tick + 1
-                    if (buildMode) {
+                    if (!buildMode) {
                         BuildButton.textContent = `Build`
                     } else {
                         BuildButton.textContent = `Exit Build Mode`
@@ -131,10 +132,11 @@
         </script>
         <style>
             #build-button {
-                font-size: 40px;
+                font-size: 26px;
                 width: 300px;
-                height: 140px;
+                height: 10px;
                 border: 3px rgba(208, 213, 105, 0.83);
+                background-color: rgba(32, 174, 122, 0.862);
                 border-radius: 5px;
                 cursor: pointer;
             }
