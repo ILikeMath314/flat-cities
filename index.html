@@ -23,6 +23,7 @@
                 var incomePerSecond = 0
                 var maxPopulation = 0
                 var cityPopulation = 0
+                var populationIncreasePerSecond = 0
                 var cityHappiness = 50
                 var taxRate = 0
                 var mouseY = null
@@ -294,7 +295,10 @@
                         squareCoins = squareCoins + incomePerSecond
                     }
                     squareCoinsIndicator.textContent = `${squareCoins}`
-
+                    populationIncreasePerSecond = Math.ceil(maxPopulation / 120)
+                    if (populationIncreasePerSecond < maxPopulation - cityPopulation && (tick % 40 == 0)) {
+                        cityPopulation = cityPopulation + populationIncreasePerSecond
+                    }
                 }
 
                 setInterval(mainloop, 25)
