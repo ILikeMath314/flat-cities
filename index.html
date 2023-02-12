@@ -25,7 +25,6 @@
                 var cityPopulation = 0
                 var populationIncreasePerSecond = 0
                 var cityHappiness = 50
-                var taxRate = 0
                 var mouseY = null
                 var mouseX = null
 
@@ -37,6 +36,7 @@
 
                 const Grid = document.getElementById("grid")
                 const squareCoinsIndicator = document.getElementById("squareCoins-msg")
+                const populationIndicator = document.getElementById("population-indicator")
                 const BuildButton = document.getElementById("build-button")
                 const BasicHouseButton = document.getElementById("basic-house-button")
                 const GrassButton = document.getElementById("grass-button")
@@ -286,7 +286,7 @@
                 function mainloop() {
                     tick = tick + 1
                     if (!buildMode) {
-                        BuildButton.textContent = `Build`
+                        BuildButton.textContent = `建造`
                         hidePlacementIndicators()
                     } else {
                         BuildButton.textContent = `關閉建造`
@@ -295,7 +295,9 @@
                         squareCoins = squareCoins + incomePerSecond
                     }
                     squareCoinsIndicator.textContent = `${squareCoins}`
+                    populationIndicator.textContent = `人口：${cityPopulation}`
                     populationIncreasePerSecond = Math.ceil(maxPopulation / 120)
+                    incomePerSecond = cityPopulation * Math.round(cityHappiness / 50)
                     if (populationIncreasePerSecond < maxPopulation - cityPopulation && (tick % 40 == 0)) {
                         cityPopulation = cityPopulation + populationIncreasePerSecond
                     }
@@ -337,6 +339,11 @@
                 font-size: 22px;
                 font-family: 'Noto Sans TC', sans-serif;
                 color: rgba(14, 71, 50, 0.896);
+            }
+
+            div.resource-box img {
+                width: 32px;
+                height: 32px;
             }
 
             img.placement-indicator {
@@ -416,6 +423,7 @@
         <!--resource management box-->
         <div class="resource-boxes-container">
             <div class="resource-box"><p id="squareCoins-msg">100</p><img src="images/Icons/squareCoinIcon.png" class="resource-indicator"></div>
+            <div class="resource-box"><p id="population-indicator">人口：0</p></div>
         </div>
 
         <!--building changer buttons-->
