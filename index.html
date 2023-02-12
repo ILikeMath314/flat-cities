@@ -5,7 +5,7 @@
         <!--Google fonts-->
         <link rel="preconnect" href="https://fonts.googleapis.com"> 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Noto+Sans+TC&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto Sans TC&family=Noto+Sans+TC&display=swap" rel="stylesheet">
         <meta charset="utf-16i">
         <script>
 
@@ -17,8 +17,14 @@
 
                 var buildMode = false
                 var nowBuildingID = 0
-                var tick = 0                                                                                
+                var tick = 0
+                var squareCoins = 100                                                                                
                 var buildRotation = 0
+                var incomePerSecond = 0
+                var maxPopulation = 0
+                var cityPopulation = 0
+                var cityHappiness = 50
+                var taxRate = 0
                 var mouseY = null
                 var mouseX = null
 
@@ -29,6 +35,7 @@
                 const Body = document.querySelector("body")
 
                 const Grid = document.getElementById("grid")
+                const squareCoinsIndicator = document.getElementById("squareCoins-msg")
                 const BuildButton = document.getElementById("build-button")
                 const BasicHouseButton = document.getElementById("basic-house-button")
                 const GrassButton = document.getElementById("grass-button")
@@ -86,7 +93,7 @@
                 async function showErrorMsg(msg) {
                     ErrorMessage.textContent = msg
                     ErrorMessageBox.style = "opacity:0.88;"
-                    await delay(1200)
+                    await delay(2800)
                     fadeOutEffect()
                 }
                 
@@ -105,81 +112,110 @@
                         const RightSlot = `slot${Number(srcID.slice(4))+1}`
 
                         if (nowBuildingID === 0) {
-                            document.getElementById(event.srcElement.id).src = "./images/green.gif"
+                            document.getElementById(event.srcElement.id).src = "./images/Items/green.gif"
                             document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
                         }
                         if (nowBuildingID === 1) {
-                            if (buildRotation%360 === 0 && (document.getElementById(UnderSlot).classList.contains("road"))) {
-                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                            if (squareCoins >= 50) {
+	                            if (buildRotation%360 === 0 && (document.getElementById(UnderSlot).classList.contains("road"))) {
+	                                document.getElementById(event.srcElement.id).src = "./images/Items/basic-house.png"
+	                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                    squareCoins = squareCoins - 50
+                                    maxPopulation = maxPopulation + 3
+	                            } else {
+	                                showErrorMsg("房子需要面向道路")
+	                            }
+	                            if (buildRotation%360 === 90 && document.getElementById(LeftSlot).classList.contains("road")) {
+	                                document.getElementById(event.srcElement.id).src = "./images/Items/basic-house.png"
+	                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                    squareCoins = squareCoins - 50
+                                    maxPopulation = maxPopulation + 3
+	                            } else {
+	                                showErrorMsg("房子需要面向道路")
+	                            }
+	                            if (buildRotation%360 === 180 && document.getElementById(UpperSlot).classList.contains("road")) {
+	                                document.getElementById(event.srcElement.id).src = "./images/Items/basic-house.png"
+	                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                    squareCoins = squareCoins - 50
+                                    maxPopulation = maxPopulation + 3
+	                            } else {
+	                                showErrorMsg("房子需要面向道路")
+	                            }
+	                            if (buildRotation%360 === 270 && (document.getElementById(RightSlot).classList.contains("road"))) {
+	                                document.getElementById(event.srcElement.id).src = "./images/Items/basic-house.png"
+	                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                    squareCoins = squareCoins - 50
+                                    maxPopulation = maxPopulation + 3
+	                            } else {
+	                                showErrorMsg("房子需要面向道路")
+	                            }
                             } else {
-                                showErrorMsg("Houses can only be placed facing roads.")
-                            }
-                            if (buildRotation%360 === 90 && document.getElementById(LeftSlot).classList.contains("road")) {
-                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            } else {
-                                showErrorMsg("Houses can only be placed facing roads.")
-                            }
-                            if (buildRotation%360 === 180 && document.getElementById(UpperSlot).classList.contains("road")) {
-                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            } else {
-                                showErrorMsg("Houses can only be placed facing roads.")
-                            }
-                            if (buildRotation%360 === 270 && (document.getElementById(RightSlot).classList.contains("road"))) {
-                                document.getElementById(event.srcElement.id).src = "./images/basic-house.png"
-                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            } else {
-                                showErrorMsg("Houses can only be placed facing roads.")
+                                showErrorMsg("方塊幣不足")
                             }
                         }
                         if (nowBuildingID === 2) {
-                            if (document.getElementById(RightSlot).classList .contains("road") ||
-                                (document.getElementById(UnderSlot).classList.contains("road")) ||
-                                (document.getElementById(LeftSlot).classList.contains("road")) ||
-                                (document.getElementById(UpperSlot).classList.contains("road"))) {
-                            document.getElementById(event.srcElement.id).src = "./images/road-straight.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            document.getElementById(event.srcElement.id).classList.add("road")
+                            if (squareCoins >= 5) {
+	                            if (document.getElementById(RightSlot).classList .contains("road") ||
+	                                (document.getElementById(UnderSlot).classList.contains("road")) ||
+	                                (document.getElementById(LeftSlot).classList.contains("road")) ||
+	                                (document.getElementById(UpperSlot).classList.contains("road"))) {
+	                            
+	                                document.getElementById(event.srcElement.id).src = "./images/Items/road-straight.png"
+	                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+	                                document.getElementById(event.srcElement.id).classList.add("road")
+                                    squareCoins = squareCoins - 5
+	                            } else {
+	                                showErrorMsg("道路只能建造在道路旁邊")
+	                            }
                             } else {
-                                showErrorMsg("roads can only be placed next to roads")
+                                showErrorMsg("方塊幣不足")
                             }
                         }
                         if (nowBuildingID === 3) {
-                            if (document.getElementById(RightSlot).classList .contains("road")||
-                                (document.getElementById(UnderSlot).classList.contains("road"))||
-                                (document.getElementById(LeftSlot).classList.contains("road")) ||
-                                (document.getElementById(UpperSlot).classList.contains("road"))) {
-                            document.getElementById(event.srcElement.id).src = "./images/road-curved.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            document.getElementById(event.srcElement.id).classList.add("road")
+                            if (squareCoins >= 5)
+                                if (document.getElementById(RightSlot).classList .contains("road")||
+                                    (document.getElementById(UnderSlot).classList.contains("road"))||
+                                    (document.getElementById(LeftSlot).classList.contains("road")) ||
+                                    (document.getElementById(UpperSlot).classList.contains("road"))) {
+
+                                    document.getElementById(event.srcElement.id).src = "./images/Items/road-curved.png"
+                                    document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                    document.getElementById(event.srcElement.id).classList.add("road")
+                                    squareCoins = squareCoins - 5
                             } else {
-                                showErrorMsg("roads can only be placed next to roads")
+                                showErrorMsg("道路只能建造在道路旁邊")
                             }
                         }
                         if (nowBuildingID === 4) {
-                            if (document.getElementById(RightSlot).classList .contains("road")||
-                                (document.getElementById(UnderSlot).classList.contains("road"))||
-                                (document.getElementById(LeftSlot).classList.contains("road")) ||
-                                (document.getElementById(UpperSlot).classList.contains("road"))) {
-                            document.getElementById(event.srcElement.id).src = "./images/road-3intersection.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            document.getElementById(event.srcElement.id).classList.add("road")
+                            if (squareCoins >= 8) {
+	                            if (document.getElementById(RightSlot).classList .contains("road")||
+	                                (document.getElementById(UnderSlot).classList.contains("road"))||
+	                                (document.getElementById(LeftSlot).classList.contains("road")) ||
+	                                (document.getElementById(UpperSlot).classList.contains("road"))) {
+	
+	                                document.getElementById(event.srcElement.id).src = "./images/Items/road-3intersection.png"
+	                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+	                                document.getElementById(event.srcElement.id).classList.add("road")
+                                    squareCoins = squareCoins - 8
+	                            } else {
+	                                showErrorMsg("道路只能建造在道路旁邊")
+	                            }
                             } else {
-                                showErrorMsg("roads can only be placed next to roads")
+                                showErrorMsg("方塊幣不足")
                             }
                         }
                         if (nowBuildingID === 5) {
                             if ((document.getElementById(RightSlot).classList.contains("road")) ||
                                 (document.getElementById(UnderSlot).classList.contains("road"))||
                                 (document.getElementById(LeftSlot).classList.contains("road")) ||
-                                (document.getElementById(UpperSlot).classList.contains("road"))) {                                                                                                                                                                                                                                    
-                            document.getElementById(event.srcElement.id).src = "./images/road-4intersection.png"
-                            document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
-                            document.getElementById(event.srcElement.id).classList.add("road")
+                                (document.getElementById(UpperSlot).classList.contains("road"))) {    
+
+                                document.getElementById(event.srcElement.id).src = "./images/Items/road-4intersection.png"
+                                document.getElementById(event.srcElement.id).style = `rotate:${buildRotation%360}deg;`
+                                document.getElementById(event.srcElement.id).classList.add("road")
+                                squareCoins = squareCoins - 8
                             } else {
-                                showErrorMsg("roads can only be placed next to roads")
+                                showErrorMsg("道路只能建造在道路旁邊")
                             }
                         }                   
                     }
@@ -252,11 +288,16 @@
                         BuildButton.textContent = `Build`
                         hidePlacementIndicators()
                     } else {
-                        BuildButton.textContent = `Exit Build Mode`
-                    }         
+                        BuildButton.textContent = `關閉建造`
+                    }
+                    if(tick % 40 == 0) {
+                        squareCoins = squareCoins + incomePerSecond
+                    }
+                    squareCoinsIndicator.textContent = `${squareCoins}`
+
                 }
 
-                setInterval(mainloop, 33.333)
+                setInterval(mainloop, 25)
 
             } 
         </script>
@@ -270,10 +311,12 @@
                 border-radius: 5px;
                 cursor: pointer;
             }
+
             div.build-button {
                 border: 3px rgba(208, 213, 105, 0.83);
                 margin: 30px;
             }
+
             div.error-message-box {
                 opacity: 1;
                 position: absolute;
@@ -281,6 +324,17 @@
                 left: 35%;
                 right: 35%;
             }
+
+            div.resource-box {
+                display: flex;
+                flex-direction: row;
+                width: fit-content;
+                height: fit-content;
+                font-size: 22px;
+                font-family: 'Noto Sans TC', sans-serif;
+                color: rgba(64, 126, 103, 0.896);
+            }
+
             img.placement-indicator {
                 opacity: 0;
                 position: absolute;
@@ -289,6 +343,21 @@
                 width: 64px;
                 height: 64px;
                 z-index: 1;
+            }
+
+            img.resource-indicator {
+                float: left;
+            }
+
+            div.resource-box img {
+                float: right;
+            }
+
+            div.resource-boxes-container {
+                background-color: rgba(210, 105, 30, 0.49);
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
             }
 
             img.buildingChanger {
@@ -335,56 +404,60 @@
             }
 
             p {
-                font-family: 'Montserrat', sans-serif;
+                font-family: 'Noto Sans TC', sans-serif;
             }
 
         </style>
-    </head>
     <body>
         <!--main grid-->
         <div class="grid-container" id="grid">
-            <img class="item road" src="./images/road-straight.png" id="slot0">
+            <img class="item road" src="./images/Items/road-straight.png" id="slot0">
         </div>
 
         <!--error message box-->
         <div class="error-message-box"><p id="error-message"></p></div>
 
+        <!--resource management box-->
+        <div class="resource-boxes-container">
+            <div class="resource-box"><p id="squareCoins-msg"><img src="images/Icons/squareCoinIcon.png" class="resource-indicator">100</p></div>
+        </div>
+
         <!--building changer buttons-->
         <div class="building-list">
             <div style="text-align: center" id="build-button">
-                <p>Build</p>
+                <p>建造</p>
             </div>
             <div class="build-button">
-                <img id="basic-house-button" src="./images/basic-house.png" class="buildingChanger">
-                <p style="text-align: center; font: size 16px;">Basic House</p>
+                <img id="basic-house-button" src="./images/Items/basic-house.png" class="buildingChanger">
+                <p style="text-align: center; font: size 16px;">基本房子, 50<img class="resource-indicator"src="./images/Icons/squareCoinIcon.png"></p>
             </div>
             <div class="build-button">
-                <img id="grass-button" src="./images/green.gif" class="buildingChanger">
-                <p style="text-align: center; font: size 16px;">Grass</p>
+                <img id="grass-button" src="./images/Items/green.gif" class="buildingChanger">
+                <p style="text-align: center; font: size 16px;">草地, 5<img class="resource-indicator"src="./images/Icons/squareCoinIcon.png"></p>
             </div>
             <div class="build-button">
-                <img id="road-straight-button" src="./images/road-straight.png" class="buildingChanger">
-                <p style="text-align: center; font: size 16px;">Road</p>
+                <img id="road-straight-button" src="./images/Items/road-straight.png" class="buildingChanger">
+                <p style="text-align: center; font: size 16px;">道路, 5<img class="resource-indicator"src="./images/Icons/squareCoinIcon.png"></p>
             </div>
             <div class="build-button">
-                <img id="road-curved-button" src="./images/road-curved.png" class="buildingChanger">
-                <p style="text-align: center; font: size 16px;">Curved road</p>
+                <img id="road-curved-button" src="./images/Items/road-curved.png" class="buildingChanger">
+                <p style="text-align: center; font: size 16px;">轉彎道路, 5<img class="resource-indicator"src="./images/Icons/squareCoinIcon.png"></p>
             </div>
             <div class="build-button">
-                <img id="road-2intersection-button" src="./images/road-4intersection.png" class="buildingChanger">
-                <p style="text-align: center; font: size 16px;">2 road intersection</p>
+                <img id="road-2intersection-button" src="./images/Items/road-4intersection.png" class="buildingChanger">
+                <p style="text-align: center; font: size 16px;">路口, 8<img class="resource-indicator"src="./images/Icons/squareCoinIcon.png"></p>
             </div>
             <div class="build-button">
-                <img id="road-Tintersection-button" src="./images/road-3intersection.png" class="buildingChanger">
-                <p style="text-align: center; font: size 16px;">T shaped road intersection</p>
+                <img id="road-Tintersection-button" src="./images/Items/road-3intersection.png" class="buildingChanger">
+                <p style="text-align: center; font: size 16px;">T形路口, 8<img class="resource-indicator"src="./images/Icons/squareCoinIcon.png"></p>
             </div>
         </div>
         <!--placement indicators-->
-        <img id="indicator5" class="placement-indicator" src="./images/road-4intersection.png">
-        <img id="indicator4" class="placement-indicator" src="./images/road-3intersection.png">
-        <img id="indicator3" class="placement-indicator" src="./images/road-curved.png">
-        <img id="indicator2" class="placement-indicator" src="./images/road-straight.png">
-        <img id="indicator1" class="placement-indicator" src="./images/basic-house.png">
-        <img id="indicator0" class="placement-indicator" src="./images/green.gif">
+        <img id="indicator5" class="placement-indicator" src="./images/Items/road-4intersection.png">
+        <img id="indicator4" class="placement-indicator" src="./images/Items/road-3intersection.png">
+        <img id="indicator3" class="placement-indicator" src="./images/Items/road-curved.png">
+        <img id="indicator2" class="placement-indicator" src="./images/Items/road-straight.png">
+        <img id="indicator1" class="placement-indicator" src="./images/Items/basic-house.png">
+        <img id="indicator0" class="placement-indicator" src="./images/Items/green.gif">
     </body>
 </html>
