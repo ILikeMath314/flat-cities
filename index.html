@@ -261,7 +261,7 @@
                 for (let i = 1; i < 2500; i++) {
                     const newGridItem = document.createElement("img")
                     newGridItem.classList.add("item")
-                    newGridItem.src = "./images/default.gif"
+                    newGridItem.src = "./images/Items/default.gif"
                     newGridItem.id = `slot${i}`
                     newGridItem.addEventListener("click", buildModeCheck)
                     Grid.appendChild(newGridItem)
@@ -319,7 +319,7 @@
 
             div.error-message-box {
                 opacity: 1;
-                position: absolute;
+                position: fixed;
                 top: 0px;
                 left: 35%;
                 right: 35%;
@@ -337,7 +337,7 @@
 
             img.placement-indicator {
                 opacity: 0;
-                position: absolute;
+                position: fixed;
                 top: 0px;
                 left: 0px;
                 width: 64px;
@@ -345,17 +345,9 @@
                 z-index: 1;
             }
 
-            img.resource-indicator {
-                float: left;
-            }
-
-            div.resource-box img {
-                float: right;
-            }
-
             div.resource-boxes-container {
                 background-color: rgba(210, 105, 30, 0.49);
-                position: absolute;
+                position: fixed;
                 left: 0px;
                 bottom: 0px;
             }
